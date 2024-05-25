@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Las credenciales son incorrectas, mostrar un mensaje de error
             $loginError = "Usuario o contraseña incorrectos";
+            header('location: login.php');
         }
     } else {
         // Mostrar un mensaje de error si los campos están vacíos
