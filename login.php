@@ -60,17 +60,18 @@
 
     .input {
         width: calc(100% - 40px);
-    border: none;
-    border-bottom: 1px solid #689284;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    background-color: transparent; 
+        border: none;
+        border-bottom: 1px solid #689284;
+        outline: none;
+        padding: 10px;
+        font-size: 16px;
+        background-color: transparent;
     }
 
     .input#usuario {
-    background-color: transparent !important; /* Asegura que el fondo sea transparente solo para el campo de usuario */
-}
+        background-color: transparent !important;
+        /* Asegura que el fondo sea transparente solo para el campo de usuario */
+    }
 
     .btn-login {
         background-color: #294d3b;
@@ -81,7 +82,8 @@
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        width: 100%; /* Ancho del 100% para ocupar todo el contenedor */
+        width: 100%;
+        /* Ancho del 100% para ocupar todo el contenedor */
     }
 
     .btn-login:hover {
@@ -117,50 +119,54 @@
         display: flex;
         align-items: center;
     }
-    
 </style>
 
+<?php
+session_start();
+$loginError = isset($_SESSION['loginError']) ? $_SESSION['loginError'] : '';
+unset($_SESSION['loginError']);
+?>
 
 <div class="main-container">
-        <div class="contenedor-img img">
-            <img src="images/sena.jpg" alt="sena" border="0" />
-        </div>
+    <div class="contenedor-img img">
+        <img src="images/sena.jpg" alt="sena" border="0" />
+    </div>
 
-        <div class="formulario">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="texto-iniciar">Inicia sesión</h2>
-                </div>
-                <div class="card-body">
-                    <?php if(isset($loginError)) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $loginError; ?>
+    <div class="formulario">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="texto-iniciar">Inicia sesión</h2>
+            </div>
+            <div class="card-body">
+                <?php if (!empty($loginError)) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <p><?php echo $loginError; ?></p>
+                    </div>
+                <?php } ?>
+                <form action="validar.php" method="post">
+                    <div class="form-group">
+                        <div class="controll">
+                            <img src="https://i.ibb.co/cc1dbXt/user-1.png" class="icon" alt="" srcset="">
+                            <input name="usuario" id="usuario" type="text" class="input" placeholder="Nombre de Usuario">
                         </div>
-                    <?php } ?>
-                    <form action="validar.php" method="post">
-                        <div class="form-group">
-                            <div class="controll">
-                                <img src="https://i.ibb.co/cc1dbXt/user-1.png" class="icon" alt="" srcset="">
-                                <input name="usuario" id="usuario" type="text" class="input" placeholder="Nombre de Usuario">
+                    </div>
+                    <div class="form-group">
+                        <div class="controll">
+                            <img src="https://i.ibb.co/vdMjtxN/lock-1.png" class="icon" alt="" srcset="">
+                            <input type="password" class="input" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                            <div class="toggle-contraseña" onclick="togglePasswordVisibility('contraseña')">
+                                <img id="eye-icon" src="https://img.icons8.com/material-outlined/24/000000/invisible.png" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="controll">
-                                <img src="https://i.ibb.co/vdMjtxN/lock-1.png" class="icon" alt="" srcset="">
-                                <input type="password" class="input" id="contraseña" name="contraseña" placeholder="Contraseña" required>
-                                <div class="toggle-contraseña" onclick="togglePasswordVisibility('contraseña')">
-                                    <img id="eye-icon" src="https://img.icons8.com/material-outlined/24/000000/invisible.png"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" name="login" class="btn btn-login">Acceder</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="login" class="btn btn-login">Acceder</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 

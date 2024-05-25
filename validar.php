@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Establecer la conexión con la base de datos
 $host = "localhost";
@@ -34,18 +35,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar si se encontró un registro que coincida con las credenciales
         if ($resultado->num_rows > 0) {
             // Iniciar sesión y redirigir al usuario a la página de inicio
-            session_start();
             $_SESSION['usuario'] = $usuario;
             header("Location: panel.php");
             exit;
         } else {
             // Las credenciales son incorrectas, mostrar un mensaje de error
-            $loginError = "Usuario o contraseña incorrectos";
-            header('location: login.php');
+            $_SESSION['loginError'] = "Usuario o contraseña incorrectos";
+            header("Location: login.php");
+            exit;
         }
     } else {
         // Mostrar un mensaje de error si los campos están vacíos
-        $loginError = "Por favor, ingrese el usuario y la contraseña.";
+        $_SESSION['loginError'] = "Por favor, ingrese el usuario y la contraseña.";
+        header("Location: login.php");
+        exit;
     }
 }
 
