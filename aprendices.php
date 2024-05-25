@@ -1,6 +1,7 @@
 <?php
 require_once 'clases/clsAprendices.php';
 
+
 if (isset($_POST['update_aprendices'])) {
     $aprendices = new Aprendices($_POST['update_id_Aprendiz'],$_POST['update_ficha'], $_POST['update_Nombre'], $_POST['update_Apellido'], $_POST['update_Renta_Joven'], $_POST['update_Beneficios_Bienestar'], $_POST['update_Historial']);
     $aprendices->Modificar($con);
@@ -11,6 +12,8 @@ if (isset($_POST['update_aprendices'])) {
     $aprendices = new Aprendices($_POST['delete_id_Aprendiz'],'', '', '', '', '','');
     $aprendices->Eliminar($con);
 }
+
+
 
 // Realizar la consulta SQL
 $query = "SELECT id_Aprendiz,Ficha, Nombre, Apellido, Renta_Joven, Beneficios_Bienestar, Historial FROM aprendices ORDER BY Nombre ASC";

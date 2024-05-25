@@ -42,9 +42,9 @@
                                         <td><?php echo $row['Historial'] ?></td>
                                         <td>
                                             <div class="d-flex">
-                                            <a data-toggle="modal" data-target="#EditModal" href="javascript:void(0);" onclick="document.getElementById('update_id_Aprendiz').value = <?= $row['id_Aprendiz'] ?>;document.getElementById('update_ficha').value = '<?= $row['Ficha'] ?>';document.getElementById('update_Nombre').value = '<?= $row['Nombre'] ?>';document.getElementById('update_Apellido').value = '<?= $row['Apellido'] ?>';document.getElementById('update_Renta_Joven').value = '<?= $row['Renta_Joven'] ?>';document.getElementById('update_Beneficios_Bienestar').value = '<?= $row['Beneficios_Bienestar'] ?>';document.getElementById('update_Historial').value = '<?= $row['Historial'] ?>';" title="Editar Ficha" class="btn btn-sm btn-primary mr-1">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
+                                                <a data-toggle="modal" data-target="#EditModal" href="javascript:void(0);" onclick="document.getElementById('update_id_Aprendiz').value = <?= $row['id_Aprendiz'] ?>;document.getElementById('update_ficha').value = '<?= $row['Ficha'] ?>';document.getElementById('update_Nombre').value = '<?= $row['Nombre'] ?>';document.getElementById('update_Apellido').value = '<?= $row['Apellido'] ?>';document.getElementById('update_Renta_Joven').value = '<?= $row['Renta_Joven'] ?>';document.getElementById('update_Beneficios_Bienestar').value = '<?= $row['Beneficios_Bienestar'] ?>';document.getElementById('update_Historial').value = '<?= $row['Historial'] ?>';" title="Editar Ficha" class="btn btn-sm btn-primary mr-1">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
                                                 <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a data-toggle="modal" data-target="#DeleteModal" href="javascript:void(0);" onclick="document.getElementById('delete_id_Aprendiz').value = <?= $row['id_Aprendiz'] ?>;document.getElementById('delete_Nombre').value = '<?= $row['Nombre'] ?>';" title="Eliminar Aprendiz" class="btn btn-sm btn-danger">
@@ -67,6 +67,10 @@
     </section>
     <!-- /.content -->
 
+
+
+
+
     <!-- Modal para Ingresar -->
     <div class="modal fade" id="AddModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -77,10 +81,21 @@
                 <div class="modal-body">
                     <form action="panel.php?modulo=aprendices" id="ingresar" method="POST">
                         <!-- Campo ficha -->
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="add_Ficha">Ficha</label>
                             <input type="number" name="add_Ficha" id="add_Ficha" placeholder="Numero de ficha" class="form-control" required="required">
-                        </div>
+                        </div> -->
+                        <label for="add_Ficha">Ficha</label>
+                        <select name="add_Ficha" id="add_Ficha" class="form-control" required>
+                            <option value="">Seleccione una ficha</option>
+                            <?php
+                            $query = "SELECT  id_Ficha ,Numero FROM fichas";
+                            $result = mysqli_query($con, $query) or die(mysqli_error());
+                            while ($row = mysqli_fetch_array($result)) {
+                                echo '<option value="' . $row['Numero'] . '">' . $row['Numero'] . '</option>';
+                            }
+                            ?>
+                        </select>
 
                         <!-- Campo Nombre -->
                         <div class="form-group">

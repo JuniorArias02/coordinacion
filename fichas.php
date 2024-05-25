@@ -40,6 +40,8 @@ if (isset($_POST['update_fichas'])) {
     $fichas->Eliminar($con);
 }
 
+
+
 $query = "SELECT id_Ficha, Nombre, Numero, Fecha_Inicio , Fecha_Finalizacion, Estado from fichas
 ORDER BY Nombre asc;";
 $res = mysqli_query($con, $query);

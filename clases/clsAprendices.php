@@ -20,6 +20,8 @@ class Aprendices
         $this->Beneficios_Bienestar = $Beneficios_Bienestar;
         $this->Historial = $Historial;
     }
+   
+    
 
     public function Agregar($con)
     {
